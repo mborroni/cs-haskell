@@ -18,10 +18,6 @@ esPrimo :: Integer -> Bool
 esPrimo 1 = False
 esPrimo n = menorDivisor n == n
 
-{- esPseudoPrimo :: Integer -> Integer -> Bool 
-esPseudoPrimo a n | n < 3 = False 
-                  | otherwise = mod ((a^n) - a) n == 0 -}
-
 {- | Función auxiliar. esNPseudoPrimo dados dos números naturales decide si un número es n-pseudoprimo. -}
 esNPseudoPrimo :: Integer -> Integer -> Bool 
 esNPseudoPrimo a n | n < 3 = False 
@@ -35,14 +31,6 @@ es2PseudoPrimo n = esNPseudoPrimo 2 n
 es3PseudoPrimo :: Integer -> Bool
 es3PseudoPrimo n = esNPseudoPrimo 3 n
 
-{- cantidad3PseudoPrimos :: Integer -> Integer -> Integer
-cantidad3PseudoPrimos 1 m = m
-cantidad3PseudoPrimos n m | es3PseudoPrimo n = cantidad3PseudoPrimos (n - 1) (m + 1)
-                          | otherwise = cantidad3PseudoPrimos (n - 1) m 
-
-cantidad3PseudoPrimos' :: Integer -> Integer
-cantidad3PseudoPrimos' 0 = cantidad3PseudoPrimos n 0 -}
-
 {- | Ejercicio 3. cantidad3PseudoPrimos dado un número natural m calcula la cantidad de 3-pseudoprimos que hay entre 1 y m inclusive. 
     Se fija si el número cumple la condición de ser 3-pseudoprimo, si es así, suma 1 y ejecuta una recursión, sino solamente ejecuta el paso recursivo. 
     La función no está definida para el intervalo (-∞,1) aunque se podría haber definido cambiando la primer sentencia por cantidad3PseudoPrimos m | m <= 1 = 0. -}
@@ -50,11 +38,6 @@ cantidad3PseudoPrimos :: Integer -> Integer
 cantidad3PseudoPrimos 1 = 0
 cantidad3PseudoPrimos m  | es3PseudoPrimo m = 1 + cantidad3PseudoPrimos (m - 1)
                          | otherwise = cantidad3PseudoPrimos (m - 1)
-
-{- kesimo2y3PseudoPrimo :: Integer -> Integer
-kesimo2y3PseudoPrimo 1 = 0
-kesimo2y3PseudoPrimo k | es2PseudoPrimo k && es3PseudoPrimo k = k
-                       | otherwise = kesimo2y3PseudoPrimo (k - 1) -}
 
 {- | Función auxiliar. kesimo2y3PseudoPrimoDesde dados dos números un índice k y el inicio del intervalo, siendo este (n,∞), 
     devuelve el k-esimo número que es simultáneamente 2-pseudoprimo y 3-pseudoprimo. -}
