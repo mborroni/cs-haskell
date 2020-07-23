@@ -79,3 +79,44 @@ desencriptarNumeros _ [] = []
 desencriptarNumeros (n, e) (b:bs) = numeroDesencriptado : desencriptarNumeros (n, e) bs
     where numeroDesencriptado = mod (b^e) n
 
+{- Ejercicio adicional: romper código: Romper el c´odigo asociado a la clave p´ublica (100337, 60953), desencriptar la
+   siguiente pregunta: [33706, 38913, 58255, 99961, 77756, 23881, 220, 77756, 1606, 38913, 77756, 78982, 18800, 91658, 91658, 58255, 77756, 96593, 58255, 438, 22839, 28700, 18800, 1606, 58255, 48389] -}
+ 
+menorDivisorDesde :: Int -> Int -> Int
+menorDivisorDesde n k | mod n k == 0 = k
+                      | otherwise = menorDivisorDesde n (k + 1)
+
+menorDivisor :: Int -> Int
+menorDivisor n = menorDivisorDesde n 2
+
+esPrimo :: Int -> Bool
+esPrimo 1 = False
+esPrimo n = menorDivisor n == n
+
+proximoPrimo :: Int -> Int
+proximoPrimo n | esPrimo next = next
+               | otherwise = proximoPrimo next
+               where next = n + 1
+
+{- | Función auxiliar. Permite factorizar números a partir de un cierto número m que como pre-condición debería ser primo -}
+factorizarDesde :: Int -> Int -> [Int]
+factorizarDesde 1 _ = []
+factorizarDesde n m | not (esPrimo m) = []
+                    | mod n m == 0 = m : factorizarDesde (div n m) m
+                    | otherwise = factorizarDesde n (proximoPrimo m)
+
+{- | Permite factorizar el número n de la clave pública para así encontrar p y q. -}
+factorizar :: Int -> [Int]
+factorizar n = factorizarDesde n 2
+
+{- 
+    claves:
+        - pública (100337, 60953) 
+        - privada (100337, 1001)
+    input:
+        [33706, 38913, 58255, 99961, 77756, 23881, 220, 77756, 1606, 38913, 77756, 78982, 18800, 91658, 91658, 58255, 77756, 96593, 58255, 438, 22839, 28700, 18800, 1606, 58255, 48389]
+    output:
+        Cuál es tu pizza favorita? 
+    respuesta:
+        [22329,58255,50740,22839,96986,77756,61099,77756,50740,22839,28700,28700,22839,96986]
+-}
