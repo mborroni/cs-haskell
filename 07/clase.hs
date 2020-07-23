@@ -56,7 +56,7 @@ diferencia c (x:xs) | pertenece x c =  diferencia (quitar x c) xs
 diferenciaSimetrica :: Set Int -> Set Int -> Set Int
 diferenciaSimetrica c1 c2 = union (diferencia c1 c2) (diferencia c2 c1)
 
-perteneceConjuntos :: Set Int -> Set (Set Int) -> Bool
+{- perteneceConjuntos :: Set Int -> Set (Set Int) -> Bool
 perteneceConjuntos xs [] = False
 perteneceConjuntos xs (ys:yss) = iguales xs ys || perteneceConjuntos xs yss
 
@@ -70,4 +70,4 @@ agregarATodos x (c:cs) = agregarConjuntos (agregar x c) (agregarATodos x cs)
 
 partes :: Set Int -> Set (Set Int)
 partes [] = [[]]
-partes (x:xs) = union (partes xs) (agregarATodos x (partes xs)) 
+partes (x:xs) = union (partes xs) (agregarATodos x (partes xs)) -}
