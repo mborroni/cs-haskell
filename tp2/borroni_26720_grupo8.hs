@@ -1,11 +1,13 @@
 import Data.Char (ord, chr)
 import Data.String
 
+{- | Función auxiliar.-}
 mcd :: Integer -> Integer -> Integer
 mcd n m | m == 0 = n
         | otherwise = mcd m (mod n m)
 
-emcd :: (Integral a) =>  a -> a -> (a, a, a)
+{- | Función auxiliar. (ejercicio clase 09) -}
+emcd :: Integer -> Integer -> (Integer, Integer, Integer)
 emcd a 0 = (a, 1, 0)
 emcd a b = (d, t, s - (div a b) * t)
     where
@@ -26,7 +28,7 @@ solucionEcConPropAdic :: (Integer, Integer, Integer) -> (Integer, Integer)
 solucionEcConPropAdic (a, b, m) = (mod (s * b) m, m)
                                 where (d, s, t) = emcd a m 
 
-{- | Función auxiliar. -}
+{- | Función auxiliar. Resuelve ecuaciones de congruencia (ejercicio clase10) -}
 solucionEc :: (Integer, Integer, Integer) -> (Integer, Integer)
 solucionEc e = solucionEcConPropAdic (ecEquivalente e)
 
